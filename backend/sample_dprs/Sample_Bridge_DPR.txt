@@ -1,0 +1,673 @@
+================================================================================
+DETAILED PROJECT REPORT (DPR)
+CONSTRUCTION OF BRIDGE OVER BARAK RIVER
+SILCHAR, ASSAM
+================================================================================
+
+MINISTRY OF DEVELOPMENT OF NORTH EASTERN REGION (MDoNER)
+Government of India
+
+================================================================================
+EXECUTIVE SUMMARY
+================================================================================
+
+Project Title: Construction of RCC Bridge over Barak River connecting Silchar to Hailakandi
+
+Project Type: Bridge Construction
+
+Location: Silchar, Cachar District, Assam, North Eastern Region
+
+Implementing Agency: Public Works Department (PWD), Government of Assam
+
+Project Duration: 36 months
+
+Estimated Cost: Rs. 245.50 Crores
+
+Project Vision: To provide seamless connectivity between Silchar and Hailakandi districts, 
+reducing travel time by 2 hours and facilitating trade, tourism, and socio-economic 
+development in the Barak Valley region.
+
+================================================================================
+1. PROJECT BACKGROUND AND JUSTIFICATION
+================================================================================
+
+1.1 INTRODUCTION
+The proposed project involves construction of a modern RCC bridge over the Barak River 
+to connect Silchar city in Cachar district with Hailakandi district. The existing 
+connectivity requires a detour of approximately 85 km through narrow roads, resulting 
+in significant time loss and increased transportation costs.
+
+1.2 NEED FOR THE PROJECT
+- Current travel time between Silchar and Hailakandi: 3.5 hours
+- Proposed travel time with new bridge: 1.5 hours
+- Annual traffic growth rate: 8-10%
+- Existing ferry services are unreliable during monsoon season
+- Critical for emergency medical services and disaster response
+- Will boost tourism in Barak Valley region
+- Essential for transportation of agricultural produce
+
+1.3 BENEFICIARIES
+Direct Beneficiaries: 2,50,000 people in Silchar and Hailakandi districts
+Indirect Beneficiaries: 15,00,000 people in Barak Valley region
+
+1.4 ALIGNMENT WITH MDoNER OBJECTIVES
+This project aligns with MDoNER's vision of improving infrastructure connectivity 
+in the North Eastern Region, promoting balanced regional development, and enhancing 
+quality of life for the people of NER.
+
+================================================================================
+2. PROJECT SCOPE AND DESIGN
+================================================================================
+
+2.1 TECHNICAL SPECIFICATIONS
+
+Bridge Type: Prestressed Concrete Box Girder Bridge
+Total Length: 1,850 meters
+Width: 12 meters (2-lane with footpath)
+Number of Spans: 25 spans of 74m each
+Foundation: Well Foundation (18m deep)
+Design Load: IRC Class 70R Loading
+Seismic Zone: Zone V (High seismic activity)
+
+2.2 APPROACH ROADS
+- Left Bank Approach: 2.5 km (to be upgraded)
+- Right Bank Approach: 3.2 km (to be upgraded)
+- Road Width: 7.5 meters
+- Pavement Type: Bituminous concrete
+
+2.3 DESIGN STANDARDS
+The bridge design complies with:
+- IRC:6-2017 (Loads and Load Combinations)
+- IRC:21-2000 (Standard Specifications for Road Bridges)
+- IRC:78-2014 (Standard Specifications for Road Bridges - Foundation and Substructure)
+- IRC:112-2011 (Code of Practice for Concrete Road Bridges)
+- IS:1893-2016 (Criteria for Earthquake Resistant Design)
+- IS:456-2000 (Plain and Reinforced Concrete - Code of Practice)
+
+2.4 ARCHITECTURAL FEATURES
+- Pedestrian walkway on both sides (1.5m each)
+- Aesthetic lighting system
+- Safety railings as per IRC standards
+- Viewing galleries at 3 locations
+- Signage and road markings
+
+================================================================================
+3. PROJECT COST ESTIMATES
+================================================================================
+
+3.1 DETAILED COST BREAKDOWN
+
+ITEM                                          QUANTITY    RATE (Rs.)    AMOUNT (Crores)
+--------------------------------------------------------------------------------------
+A. BRIDGE STRUCTURE
+   1. Substructure Works
+      - Pile Foundation                       850 units   25,00,000     21.25
+      - Pier Construction (RCC)               24 nos      3,50,00,000   84.00
+      - Abutments (2 nos)                     2 nos       4,00,00,000   8.00
+   
+   2. Superstructure Works
+      - Prestressed Concrete Box Girders      1850 m      45,00,000     83.25
+      - Deck Slab                             22,200 sqm  12,000        2.66
+      - Crash Barriers                        3700 m      8,500         0.31
+      - Expansion Joints                      48 nos      1,50,000      0.72
+   
+   3. Protection Works
+      - Guide Bunds                           550 m       35,000        0.19
+      - Stone Pitching                        8500 sqm    2,500         0.21
+      - Rip Rap Protection                    1200 cum    3,500         0.42
+
+SUBTOTAL - BRIDGE WORKS                                                 200.01
+
+B. APPROACH ROADS
+   - Earthwork                                45,000 cum  850           3.83
+   - Pavement (Bituminous)                    42,750 sqm  4,200         17.96
+   - Cross Drainage Works                     Lump Sum                  2.50
+   - Road Safety Features                     Lump Sum                  1.20
+
+SUBTOTAL - APPROACH ROADS                                               25.49
+
+C. ALLIED WORKS
+   - Street Lighting                          85 nos      2,50,000      2.13
+   - Traffic Signage                          Lump Sum                  0.45
+   - Landscaping                              Lump Sum                  1.80
+   - Toll Plaza Infrastructure                Lump Sum                  3.50
+
+SUBTOTAL - ALLIED WORKS                                                 7.88
+
+D. CONSULTANCY & MISCELLANEOUS
+   - Design & Engineering                     5% of civil               11.67
+   - Project Management                       2% of civil               4.67
+   - Contingencies                            3% of civil               7.00
+
+SUBTOTAL - CONSULTANCY                                                  23.34
+
+--------------------------------------------------------------------------------------
+TOTAL PROJECT COST (Excluding GST)                                     256.72
+Less: Cost rationalization (5%)                                        -12.84
+SUBTOTAL                                                                243.88
+Add: GST @ 12%                                                          1.62
+--------------------------------------------------------------------------------------
+GRAND TOTAL INCLUDING GST                                              Rs. 245.50 Crores
+--------------------------------------------------------------------------------------
+
+Estimated Cost: Rs. 245.50 Crores (Rupees Two Hundred Forty Five Crores and Fifty Lakhs Only)
+
+3.2 FUNDING MECHANISM
+- Central Government Grant (MDoNER): 90% (Rs. 220.95 Crores)
+- State Government Share (Assam): 10% (Rs. 24.55 Crores)
+- Total: Rs. 245.50 Crores
+
+3.3 FINANCIAL VIABILITY
+Expected Benefits:
+- Annual time savings: 12,50,000 person-hours
+- Fuel savings: Rs. 18 Crores annually
+- Reduced vehicle maintenance: Rs. 8 Crores annually
+- Increased trade volume: Rs. 150 Crores annually
+- Tourism revenue: Rs. 25 Crores annually
+
+Economic Internal Rate of Return (EIRR): 18.5%
+Benefit-Cost Ratio (BCR): 2.3:1
+Net Present Value (NPV): Rs. 425 Crores (at 10% discount rate)
+Payback Period: 8.5 years
+
+================================================================================
+4. PROJECT IMPLEMENTATION SCHEDULE
+================================================================================
+
+4.1 DETAILED TIMELINE
+
+Phase 1: Pre-Construction (6 months)
+- Month 1-2: Detailed Engineering Design
+- Month 2-3: Soil Investigation and Testing
+- Month 3-4: Tender Process
+- Month 4-5: Contractor Mobilization
+- Month 5-6: Site Preparation and Setup
+
+Phase 2: Foundation Works (12 months)
+- Month 7-10: Well Foundation for Piers (Left Bank)
+- Month 11-14: Well Foundation for Piers (Right Bank)
+- Month 15-18: Abutment Construction
+
+Phase 3: Substructure Works (10 months)
+- Month 13-16: Pier Construction (First 12 Piers)
+- Month 17-20: Pier Construction (Remaining 12 Piers)
+- Month 21-22: Substructure Finishing
+
+Phase 4: Superstructure Works (14 months)
+- Month 19-26: Box Girder Fabrication and Erection (Spans 1-15)
+- Month 25-32: Box Girder Fabrication and Erection (Spans 16-25)
+- Month 31-32: Deck Slab Construction
+- Month 32-33: Finishing Works (Railings, Expansion Joints)
+
+Phase 5: Approach Roads & Allied Works (8 months)
+- Month 28-32: Approach Road Construction (Both Banks)
+- Month 32-34: Street Lighting Installation
+- Month 33-35: Traffic Signage and Road Markings
+- Month 34-36: Landscaping and Finishing
+
+Phase 6: Testing & Commissioning (2 months)
+- Month 35-36: Load Testing
+- Month 36: Final Inspection and Handover
+
+Total Project Duration: 36 months (3 years)
+
+Key Milestones:
+- Completion of Foundation Works: Month 18
+- Completion of Substructure: Month 22
+- Completion of Superstructure: Month 33
+- Project Commissioning: Month 36
+
+4.2 CRITICAL PATH ACTIVITIES
+- Well Foundation Works (12 months) - Critical
+- Pier Construction (10 months) - Critical
+- Box Girder Erection (14 months) - Critical
+- Approach Road Development (8 months) - Parallel Activity
+
+================================================================================
+5. TECHNICAL FEASIBILITY ANALYSIS
+================================================================================
+
+5.1 SITE CHARACTERISTICS
+Geographical Location: 24°49'N, 92°48'E
+River Width at Site: 1,600 meters
+Maximum Water Level (HFL): +42.50m
+Minimum Water Level (LWL): +38.25m
+Annual Rainfall: 2,850 mm
+Seismic Zone: Zone V
+
+5.2 SOIL INVESTIGATION RESULTS
+Stratum 1 (0-5m): Silty sand with clay
+Stratum 2 (5-12m): Medium dense sand
+Stratum 3 (12-22m): Dense sand and gravel (Load bearing stratum)
+Safe Bearing Capacity: 35 T/sqm at 18m depth
+
+5.3 HYDROLOGICAL ASSESSMENT
+100-Year Flood Discharge: 18,500 cumecs
+Design Flood Level: +42.50m
+Waterway Requirement: 1,800m (Provided: 1,850m)
+Scour Depth: 12.5m below LWL
+Foundation Depth: 18m (Safe against scour)
+
+5.4 STRUCTURAL DESIGN
+Load Combinations: As per IRC:6-2017
+Design Life: 100 years
+Maintenance-Free Design: Yes
+Seismic Design: Ductile detailing as per IS:1893-2016
+
+5.5 CONSTRUCTION METHODOLOGY
+Foundation: Well sinking method
+Piers: Cast-in-situ using climbing formwork
+Girders: Precast segmental construction with cantilever method
+Quality Control: Third-party inspection at every stage
+
+================================================================================
+6. ENVIRONMENTAL IMPACT ASSESSMENT
+================================================================================
+
+6.1 ENVIRONMENTAL CLEARANCE STATUS
+- Environmental Clearance Application: Submitted to MoEF&CC
+- Public Hearing: Conducted on 15th August 2024
+- Status: Clearance Received (EC No: EC/2024/AS/1234)
+
+6.2 POTENTIAL ENVIRONMENTAL IMPACTS
+
+Positive Impacts:
+- Reduced vehicular emissions due to shorter route
+- Fuel savings of 2.5 million liters annually
+- Better emergency response during natural disasters
+- Reduced pressure on existing ferry services
+
+Negative Impacts:
+- Temporary disturbance to aquatic life during construction
+- Air and noise pollution during construction phase
+- Tree cutting: 125 trees (Plantation: 1,250 trees)
+- Temporary disruption to river traffic
+
+6.3 MITIGATION MEASURES
+- Construction during non-breeding season of aquatic species
+- Silt curtains to control water turbidity
+- Regular water quality monitoring
+- Dust suppression measures at site
+- Compensatory afforestation: 10 trees for every tree cut
+- Wildlife corridor maintenance
+- Waste management plan for construction debris
+- Noise barriers during construction near residential areas
+
+6.4 ENVIRONMENTAL MANAGEMENT PLAN
+Budget Allocation: Rs. 4.5 Crores
+- Water Quality Monitoring: Rs. 0.50 Cr
+- Air Quality Monitoring: Rs. 0.30 Cr
+- Compensatory Afforestation: Rs. 2.00 Cr
+- Waste Management: Rs. 0.80 Cr
+- Community Awareness Programs: Rs. 0.40 Cr
+- Green Belt Development: Rs. 0.50 Cr
+
+================================================================================
+7. SOCIAL IMPACT ASSESSMENT
+================================================================================
+
+7.1 LAND REQUIREMENT
+Total Land Required: 45 hectares
+- Government Land: 28 hectares
+- Private Land (To be acquired): 17 hectares
+- Forest Land: Nil
+
+7.2 RESETTLEMENT AND REHABILITATION
+Affected Families: 42 families
+Compensation Package:
+- Market rate compensation for land
+- Rehabilitation grant: Rs. 5 lakhs per family
+- Skill development training
+- Priority employment in project construction
+
+Total R&R Budget: Rs. 8.50 Crores
+
+7.3 STAKEHOLDER CONSULTATION
+Public Consultations Held: 5 (dates: 10-Jan-2024, 15-Feb-2024, 20-Mar-2024, 25-Apr-2024, 15-Aug-2024)
+Participants: 850+ community members
+Key Concerns Raised:
+- Compensation adequacy
+- Employment opportunities
+- Construction disturbances
+- Bridge toll charges
+
+Resolutions:
+- Fair compensation as per RFCTLARR Act 2013
+- 30% local employment mandate
+- Construction timing restrictions (7 AM - 7 PM)
+- No toll for first 5 years
+
+7.4 SOCIO-ECONOMIC BENEFITS
+- Direct Employment: 800 jobs during construction
+- Indirect Employment: 2,500 jobs (hospitality, trade, services)
+- Improved Access to Healthcare: 5 hospitals within 30 minutes
+- Educational Opportunities: 15 colleges accessible
+- Market Access: 3 major markets within 1 hour
+- Tourism Boost: 50,000 additional tourists annually
+
+================================================================================
+8. RISK ASSESSMENT AND MITIGATION
+================================================================================
+
+8.1 CONSTRUCTION RISKS
+
+Risk 1: Flood During Construction
+Severity: High
+Probability: Medium
+Impact: Project delay of 3-6 months, cost overrun of 5%
+Mitigation: 
+- Construction scheduling to avoid monsoon peak
+- Flood forecasting system
+- Temporary protection works
+- Insurance coverage
+Contingency: Rs. 12 Crores allocated
+
+Risk 2: Seismic Event
+Severity: Critical
+Probability: Low
+Impact: Structural damage, safety hazard
+Mitigation:
+- Seismic design as per IS:1893 (Zone V)
+- Ductile detailing
+- Foundation anchoring
+- Regular structural health monitoring
+
+Risk 3: Foundation Challenges
+Severity: Medium
+Probability: Medium
+Impact: Cost increase of 8%, delay of 2 months
+Mitigation:
+- Detailed soil investigation completed
+- Well foundation to stable stratum (18m depth)
+- Regular pile testing
+- Experienced contractor selection
+
+8.2 FINANCIAL RISKS
+
+Risk 4: Cost Escalation
+Severity: Medium
+Probability: High
+Impact: Budget overrun of 10-15%
+Mitigation:
+- Price escalation clause in contract
+- Contingency provision (3% of project cost)
+- Quarterly cost reviews
+- Value engineering exercises
+
+Risk 5: Funding Delays
+Severity: Medium
+Probability: Low
+Impact: Project delay, contractor claims
+Mitigation:
+- MoU with funding agencies
+- State government commitment letter
+- Escrow account mechanism
+- Mobilization advance provision
+
+8.3 OPERATIONAL RISKS
+
+Risk 6: River Bed Changes
+Severity: Medium
+Probability: Medium
+Impact: Foundation instability
+Mitigation:
+- Adequate protection works
+- Regular monitoring
+- Maintenance fund allocation
+- Hydrological studies every 5 years
+
+8.4 OVERALL RISK RATING
+Financial Risk: Medium
+Technical Risk: Low
+Environmental Risk: Low
+Social Risk: Low
+Schedule Risk: Medium
+Overall Project Risk: MEDIUM
+
+================================================================================
+9. PROCUREMENT STRATEGY
+================================================================================
+
+9.1 PROCUREMENT METHOD
+Method: International Competitive Bidding (ICB)
+Contract Type: Engineering, Procurement, and Construction (EPC)
+Bid Evaluation: Quality-Cost Based Selection (QCBS) - 80:20
+
+9.2 PREQUALIFICATION CRITERIA
+- Minimum Experience: 15 years in bridge construction
+- Similar Projects: At least 2 bridges of length >1 km in last 10 years
+- Financial Capacity: Annual turnover >Rs. 500 Crores
+- Technical Capacity: Qualified engineers and equipment
+
+9.3 PROCUREMENT SCHEDULE
+- Tender Document Preparation: Month 3
+- Pre-bid Meeting: Month 4
+- Bid Submission Deadline: Month 5
+- Technical Evaluation: Month 5
+- Financial Bid Opening: Month 6
+- Contract Award: Month 6
+- Contractor Mobilization: Month 7
+
+================================================================================
+10. QUALITY ASSURANCE AND MONITORING
+================================================================================
+
+10.1 QUALITY CONTROL MEASURES
+- Third-Party Quality Monitoring Agency: Appointed
+- Material Testing: As per IRC/IS standards
+- Testing Laboratory: NABL accredited on-site lab
+- Inspection Frequency: Daily for critical activities
+- Documentation: Complete QA/QC records
+
+10.2 TESTS AND INSPECTIONS
+Foundation: Load test on 2% of piles
+Concrete: Cube test for every 10 cum of concrete
+Steel: Mill test certificates and sample testing
+Girder: Load test before erection
+Bridge: Final load test with 150% design load
+
+10.3 PROJECT MONITORING
+- Monthly Progress Review by PWD
+- Quarterly Review by State Government
+- Six-Monthly Review by MDoNER
+- Real-time Monitoring Dashboard
+- Drone Surveillance
+
+10.4 KEY PERFORMANCE INDICATORS (KPIs)
+- Schedule Variance: <5%
+- Cost Variance: <3%
+- Quality Compliance: >95%
+- Safety Record: Zero fatality target
+- Environmental Compliance: 100%
+
+================================================================================
+11. OPERATION AND MAINTENANCE PLAN
+================================================================================
+
+11.1 MAINTENANCE STRATEGY
+- Routine Maintenance: Annual
+- Periodic Maintenance: Every 5 years
+- Major Repairs: As required based on inspection
+- Service Life: 100 years
+
+11.2 MAINTENANCE BUDGET
+Annual O&M Cost: Rs. 1.25 Crores
+- Routine Inspection and Maintenance: Rs. 0.45 Cr
+- Cleaning and Minor Repairs: Rs. 0.30 Cr
+- Lighting and Electrical: Rs. 0.25 Cr
+- Emergency Fund: Rs. 0.25 Cr
+
+11.3 MAINTENANCE ORGANIZATION
+Responsible Agency: PWD, Assam (Bridges Division)
+Staffing: 12 personnel (2 engineers, 10 technical staff)
+Equipment: Inspection vehicle, tools, safety equipment
+
+11.4 STRUCTURAL HEALTH MONITORING
+- Sensors installed for continuous monitoring
+- Annual detailed inspection
+- Load rating update every 10 years
+- Seismic monitoring system
+
+================================================================================
+12. STATUTORY CLEARANCES AND APPROVALS
+================================================================================
+
+12.1 CLEARANCES OBTAINED
+✓ Environmental Clearance: EC/2024/AS/1234 (Valid till 2034)
+✓ Forest Clearance: Not Required (No forest land involved)
+✓ Wildlife Clearance: Not Required
+✓ Coastal Regulation Zone: Not Applicable
+✓ River Authority Permission: Obtained from Brahmaputra Board
+✓ Railway Clearance: Not Applicable
+✓ Airport Authority: Not Required (>10 km from airport)
+
+12.2 CLEARANCES IN PROCESS
+- Land Acquisition Notification: Under process as per RFCTLARR Act 2013
+- Pollution Control Board: Construction permission applied
+
+12.3 COMPLIANCE CERTIFICATES
+- Technical Sanction: Obtained from Chief Engineer, PWD Assam
+- Administrative Approval: Obtained from State Government
+- MDoNER Approval: In-principle approval received
+
+================================================================================
+13. LEGAL AND REGULATORY FRAMEWORK
+================================================================================
+
+13.1 APPLICABLE ACTS AND RULES
+- Right to Fair Compensation and Transparency in Land Acquisition, Rehabilitation and Resettlement Act, 2013
+- Environment (Protection) Act, 1986
+- Water (Prevention and Control of Pollution) Act, 1974
+- Air (Prevention and Control of Pollution) Act, 1981
+- Wildlife Protection Act, 1972
+- Ancient Monuments and Archaeological Sites and Remains Act, 1958
+- Contract Labour (Regulation and Abolition) Act, 1970
+- Building and Other Construction Workers Act, 1996
+
+13.2 COMPLIANCE STATUS
+All applicable legal and regulatory requirements are being complied with. 
+No litigation or legal disputes anticipated.
+
+================================================================================
+14. PROJECT IMPLEMENTATION AGENCY
+================================================================================
+
+Implementing Agency: Public Works Department (PWD), Government of Assam
+Address: PWD Headquarters, Chandmari, Guwahati-781003, Assam
+
+Nodal Officer:
+Name: Er. Rajesh Kumar Sharma
+Designation: Chief Engineer (Bridges)
+Contact: +91-361-2234567
+Email: ce.bridges.pwd@assam.gov.in
+
+Project Director:
+Name: Er. Priyanka Deka
+Designation: Superintending Engineer
+Contact: +91-361-2234589
+Email: se.silchar.bridges@assam.gov.in
+
+Project Management Consultant: M/s RITES Ltd. (Rail India Technical and Economic Service)
+
+Design Consultant: M/s Construma Consultancy Pvt. Ltd.
+
+================================================================================
+15. SUSTAINABILITY AND CLIMATE RESILIENCE
+================================================================================
+
+15.1 CLIMATE CHANGE CONSIDERATIONS
+- Design flood increased by 20% considering climate change projections
+- Temperature variation analysis for expansion joints
+- Rainfall intensity increase factored in drainage design
+- Wind load increased as per updated meteorological data
+
+15.2 SUSTAINABLE DESIGN FEATURES
+- Use of fly ash in concrete (30% cement replacement)
+- LED lighting system (80% energy saving)
+- Solar panels for toll plaza (50 kW capacity)
+- Rainwater harvesting at toll plaza
+- Recycled materials for approach road construction
+- Green belt development along approach roads
+
+15.3 CARBON FOOTPRINT
+Estimated Carbon Emissions: 35,000 tonnes CO2 (during construction)
+Carbon Offset Measures:
+- Afforestation program: 1,250 trees (offset 2,500 tonnes/year)
+- Reduced fuel consumption: Save 15,000 tonnes CO2/year
+- Net Carbon Positive after 3 years of operation
+
+================================================================================
+16. CONCLUSION AND RECOMMENDATIONS
+================================================================================
+
+16.1 PROJECT SUMMARY
+The proposed bridge over Barak River is a critical infrastructure project that will 
+significantly improve connectivity between Silchar and Hailakandi districts. The project 
+is technically sound, economically viable, environmentally sustainable, and socially 
+beneficial.
+
+16.2 KEY STRENGTHS
+- High Economic Returns (EIRR: 18.5%, BCR: 2.3:1)
+- Strong Technical Design (100-year service life)
+- Comprehensive Risk Mitigation Plan
+- Environmental and Social Clearances Obtained
+- Experienced Implementing Agency
+- Assured Funding Mechanism
+- Significant Socio-economic Benefits
+
+16.3 RECOMMENDATIONS
+Based on comprehensive assessment, this DPR recommends:
+1. Project approval by MDoNER for funding support
+2. Immediate commencement of land acquisition process
+3. Fast-tracking of tender process
+4. Constitution of high-level monitoring committee
+5. Allocation of Rs. 245.50 Crores for project implementation
+
+16.4 APPROVAL SOUGHT
+This Detailed Project Report is submitted for approval of the Ministry of Development 
+of North Eastern Region (MDoNER) under the North East Road Sector Development Scheme.
+
+Project Cost: Rs. 245.50 Crores
+Central Grant Sought: Rs. 220.95 Crores (90%)
+State Share: Rs. 24.55 Crores (10%)
+
+================================================================================
+ANNEXURES
+================================================================================
+
+Annexure-I: Detailed Drawings and Designs
+Annexure-II: Soil Investigation Report
+Annexure-III: Hydrological Study Report
+Annexure-IV: Environmental Impact Assessment Report
+Annexure-V: Social Impact Assessment Report
+Annexure-VI: Cost Estimates (Detailed BOQ)
+Annexure-VII: Implementation Schedule (Gantt Chart)
+Annexure-VIII: Land Acquisition Plan
+Annexure-IX: Stakeholder Consultation Reports
+Annexure-X: Statutory Clearance Certificates
+Annexure-XI: Financial Analysis Calculations
+Annexure-XII: Risk Assessment Matrix
+Annexure-XIII: Quality Assurance Plan
+Annexure-XIV: O&M Manual
+
+================================================================================
+DOCUMENT CONTROL
+================================================================================
+
+DPR Version: 2.0
+Date of Preparation: October 2024
+Prepared By: Public Works Department, Government of Assam
+Reviewed By: Chief Engineer (Planning), PWD Assam
+Approved By: Principal Secretary, PWD Department, Government of Assam
+
+Document Status: Final - Ready for MDoNER Approval
+
+Contact for Queries:
+Er. Rajesh Kumar Sharma, Chief Engineer (Bridges)
+PWD Assam, Chandmari, Guwahati-781003
+Phone: +91-361-2234567
+Email: ce.bridges.pwd@assam.gov.in
+
+================================================================================
+END OF DOCUMENT
+================================================================================

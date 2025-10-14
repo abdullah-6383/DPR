@@ -1,0 +1,80 @@
+{
+  "dpr_id": "20251014_222542",
+  "filename": "hindi'.pdf",
+  "upload_time": "2025-10-14T22:26:52.946515",
+  "extracted_data": {
+    "project_title": "Not Found",
+    "project_type": "road",
+    "budget": {
+      "total": 0,
+      "currency": "INR",
+      "details": "Not Found"
+    },
+    "timeline": {
+      "duration": "Not specified",
+      "duration_months": 0
+    },
+    "location": "Not Found",
+    "implementing_agency": "Not Found",
+    "word_count": 3633
+  },
+  "analysis": {
+    "_error": "JSON parsing failed",
+    "_original_error": "Expecting ',' delimiter: line 197 column 217 (char 43644)",
+    "overall_score": 50,
+    "actionable_insights": [
+      "Manual review required - automated parsing failed"
+    ],
+    "recommendations": [
+      "Please review document formatting and try again"
+    ],
+    "approval_recommendation": {
+      "decision": "REVISE",
+      "confidence": 0,
+      "reasoning": "Analysis could not be completed due to malformed response format"
+    },
+    "summary": "Technical error prevented complete analysis. Manual review recommended."
+  },
+  "actionable_insights": [
+    "Manual review required - automated parsing failed"
+  ],
+  "risk_assessment": {
+    "overall_risk_level": "medium",
+    "overall_risk_score": 50,
+    "financial_risks": [],
+    "timeline_risks": [],
+    "environmental_risks": [],
+    "resource_risks": []
+  },
+  "language": "en",
+  "structured_analysis": {
+    "executive_summary": {
+      "overall_score": "50/100",
+      "recommendation": "REVISE",
+      "analysis_date": "October 14, 2025 at 10:26 PM",
+      "summary": "Technical error prevented complete analysis. Manual review recommended."
+    },
+    "budget_analysis": "The budget details for this project were not available for detailed validation at this time.",
+    "timeline_evaluation": "The project timeline details were not available for comprehensive validation at this time.",
+    "technical_feasibility": "The technical feasibility details were not available for comprehensive assessment at this time.",
+    "risk_assessment": "Detailed risk assessment data was not available for this project at the time of analysis.",
+    "actionable_recommendations": "Based on our comprehensive analysis, the following actionable recommendations are provided to strengthen this DPR and enhance the project's success potential. Manual review required - automated parsing failed.",
+    "compliance_check": "Detailed compliance assessment data was not available for this project review.",
+    "final_assessment": "Based on this comprehensive analysis, I recommend that the DPR be revised to address the concerns identified throughout this assessment. While the project shows promise and has several strong elements, the issues highlighted need to be resolved before approval. Once these revisions are made, the project should be well-positioned for successful implementation.\n\nAnalysis could not be completed due to malformed response format"
+  },
+  "structured_analysis_metadata": {
+    "generated_at": "2025-10-14T22:26:52.947234",
+    "format": "plain_text",
+    "exportable": true,
+    "sections": [
+      "executive_summary",
+      "budget_analysis",
+      "timeline_evaluation",
+      "technical_feasibility",
+      "risk_assessment",
+      "actionable_recommendations",
+      "compliance_check",
+      "final_assessment"
+    ]
+  }
+}
