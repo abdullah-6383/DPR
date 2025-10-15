@@ -93,7 +93,7 @@ const PortalContent: React.FC = () => {
     <div className="min-h-screen bg-black py-20 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Role-specific Content */}
-        {user.role === 'mdoner' ? (
+        {user.role === 'admin' ? (
           <MDoNERDashboard 
             sectionApprovals={sectionApprovals}
             approveSection={approveSection}
@@ -2223,7 +2223,7 @@ const ClientDashboard: React.FC<ClientDashboardProps> = ({ sectionApprovals }) =
           uploadedBy: {
             name: user.name,
             email: user.email,
-            department: user.department
+            department: user.department || 'N/A'
           },
           analysisData: data.result // Store the analysis result
         });
