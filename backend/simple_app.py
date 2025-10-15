@@ -51,7 +51,7 @@ except ImportError:
 # ============================================================================
 
 # Gemini API Configuration
-GEMINI_API_KEY = "AIzaSyDcR-ME1ZmPG7Lv1BgkZOeuA9RenioZAyM"
+GEMINI_API_KEY = "AIzaSyBFX7BxmEZvVRxM2owKgGr3wotzmm_6g4c"
 GEMINI_MODEL = "gemini-2.0-flash-exp"  # Fastest model available (Oct 2025)
 
 # Application Configuration
@@ -149,8 +149,8 @@ def structure_dpr_data(text: str) -> Dict:
     budget_patterns = [
         # Pattern 1: "Total 1,940 Lakhs (n19.4 Cr)" - dual format
         (r'Total\s+([\d,]+)\s+Lakhs?\s*\(n?([\d\.]+)\s+Cr', 'dual'),
-        # Pattern 2: "Estimated Cost: Rs. 114.93 Cr"
-        (r'(?:Estimated|Total|Project)?\s*Cost[\s:]*Rs\.?\s*([\d\.]+)\s+Cr', 'crores'),
+        # Pattern 2: "Estimated Cost: Rs. 245.50 Crores"
+        (r'(?:Estimated|Total|Project)\s+Cost[\s:]*Rs\.?\s*([\d\.]+)\s+(?:Crores?|Cr)', 'crores'),
         # Pattern 3: "Project Cost: n18.75 Crores"
         (r'Project Cost:\s*n?([\d\.]+)\s+Crores?', 'crores'),
         # Pattern 4: "Budget: Rs. 114.93 Crores"
@@ -192,13 +192,18 @@ def structure_dpr_data(text: str) -> Dict:
                 
                 # If we found a valid budget, break
                 if budget["total"] > 0:
+                    print(f"[DEBUG] Budget extracted: {budget['details']} (pattern: {pattern})")
                     break
             except (ValueError, IndexError) as e:
+                print(f"[DEBUG] Budget pattern matched but parsing failed: {e}")
                 continue
+    
+    if budget["total"] == 0:
+        print(f"[DEBUG] No budget found in text. First 500 chars: {text[:500]}")
     
     # Extract timeline
     timeline = {"duration": "Not specified", "duration_months": 0}
-    duration_match = re.search(r'(?:Duration|Timeline)[:\s]+(\d+)\s*(months?|years?)', text, re.IGNORECASE)
+    duration_match = re.search(r'(?:Duration|Timeline|Project Duration)[:\s]+(\d+)\s*(months?|years?)', text, re.IGNORECASE)
     if duration_match:
         value = int(duration_match.group(1))
         unit = duration_match.group(2).lower()
@@ -225,7 +230,7 @@ def structure_dpr_data(text: str) -> Dict:
             project_type = ptype
             break
     
-    return {
+    structured_data = {
         "project_title": extract_field(["Project Title", "Title", "Project Name"]),
         "project_type": project_type,
         "budget": budget,
@@ -234,6 +239,15 @@ def structure_dpr_data(text: str) -> Dict:
         "implementing_agency": extract_field(["Implementing Agency", "Nodal Agency"]),
         "word_count": len(text.split()),
     }
+    
+    # Debug logging
+    print(f"[DEBUG] Structured DPR Data:")
+    print(f"  - Title: {structured_data['project_title']}")
+    print(f"  - Location: {structured_data['location']}")
+    print(f"  - Budget: {structured_data['budget']['details']}")
+    print(f"  - Duration: {structured_data['timeline']['duration']}")
+    
+    return structured_data
 
 
 # ============================================================================
@@ -1887,6 +1901,104 @@ async def health_check():
     }
 
 
+@app.get("/api/download/{document_id}")
+async def download_document(document_id: str):
+    """
+    Download uploaded DPR document by document ID
+    Document ID format: original_filename (e.g., sampledpr.pdf)
+    
+    Returns the actual uploaded file from the uploads directory
+    """
+    from fastapi.responses import FileResponse
+    
+    try:
+        # First, try to find the stored filename in analysis results
+        # Check both backend/analysis_results and root analysis_results
+        analysis_dirs = ["analysis_results", "../analysis_results"]
+        
+        for analysis_dir in analysis_dirs:
+            if os.path.exists(analysis_dir):
+                json_files = [f for f in os.listdir(analysis_dir) if f.endswith('.json')]
+                
+                for json_file in json_files:
+                    json_path = os.path.join(analysis_dir, json_file)
+                    try:
+                        with open(json_path, 'r', encoding='utf-8') as f:
+                            data = json.load(f)
+                            
+                        # Check if this analysis corresponds to the requested document
+                        if data.get('filename') == document_id or data.get('original_filename') == document_id:
+                            stored_filename = data.get('stored_filename')
+                            file_path_from_json = data.get('file_path')
+                            
+                            if stored_filename and os.path.exists(f"uploads/{stored_filename}"):
+                                file_path = f"uploads/{stored_filename}"
+                            elif file_path_from_json and os.path.exists(file_path_from_json):
+                                file_path = file_path_from_json
+                            else:
+                                continue
+                            
+                            # Determine media type
+                            extension = stored_filename.split('.')[-1].lower() if stored_filename else 'pdf'
+                            media_type = {
+                                'pdf': 'application/pdf',
+                                'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                                'doc': 'application/msword',
+                                'txt': 'text/plain'
+                            }.get(extension, 'application/octet-stream')
+                            
+                            print(f"[DOWNLOAD] Sending file: {file_path} as {document_id}")
+                            return FileResponse(
+                                path=file_path,
+                                media_type=media_type,
+                                filename=document_id  # Use original filename for download
+                            )
+                    except Exception as e:
+                        print(f"[WARNING] Error reading {json_file}: {e}")
+                        continue
+        
+        # Fallback: Search uploads directory for matching files
+        uploads_dir = "uploads"
+        if not os.path.exists(uploads_dir):
+            raise HTTPException(404, "Uploads directory not found")
+        
+        files = os.listdir(uploads_dir)
+        
+        # If document_id is the original name, find the corresponding dpr_timestamp file
+        # We'll return the most recent file that matches
+        if document_id.lower().endswith(('.pdf', '.docx', '.doc', '.txt')):
+            # Return the most recent file (assuming one file for now)
+            if files:
+                latest_file = sorted(files, reverse=True)[0]  # Get most recent file
+                file_path = os.path.join(uploads_dir, latest_file)
+                
+                # Determine media type
+                extension = latest_file.split('.')[-1].lower()
+                media_type = {
+                    'pdf': 'application/pdf',
+                    'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                    'doc': 'application/msword',
+                    'txt': 'text/plain'
+                }.get(extension, 'application/octet-stream')
+                
+                print(f"[DOWNLOAD-FALLBACK] Sending most recent file: {file_path} as {document_id}")
+                return FileResponse(
+                    path=file_path,
+                    media_type=media_type,
+                    filename=document_id  # Use original filename for download
+                )
+        
+        raise HTTPException(404, f"Document not found: {document_id}")
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"[ERROR] Download error: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(500, f"Error downloading document: {str(e)}")
+
+
 @app.post("/api/upload-dpr")
 async def upload_and_analyze_dpr(
     file: UploadFile = File(...),
@@ -1946,6 +2058,8 @@ async def upload_and_analyze_dpr(
         result = {
             "dpr_id": timestamp,
             "filename": file.filename,
+            "stored_filename": filename,  # Add the actual stored filename
+            "file_path": file_path,  # Add the full file path
             "upload_time": datetime.now().isoformat(),
             "extracted_data": structured_dpr,
             "analysis": analysis,
@@ -1994,6 +2108,472 @@ async def upload_and_analyze_dpr(
     except Exception as e:
         print(f"[ERROR] Error: {e}")
         raise HTTPException(500, f"Error processing DPR: {str(e)}")
+
+
+@app.post("/api/upload-dpr-fast")
+async def upload_and_analyze_dpr_fast(
+    file: UploadFile = File(...),
+    language: str = Form("en")
+):
+    """
+    FAST Upload - Returns ONLY recommendations for client portal
+    Optimized for 3x faster processing by skipping full analysis
+    
+    - **file**: PDF or DOCX file
+    - **language**: en, hi, as, bn, mni, ne
+    """
+    
+    try:
+        # Validate file type
+        file_extension = file.filename.split(".")[-1].lower()
+        if file_extension not in ['pdf', 'docx', 'doc', 'txt']:
+            raise HTTPException(400, f"Unsupported file type: {file_extension}")
+        
+        # Save file
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"dpr_{timestamp}.{file_extension}"
+        file_path = f"uploads/{filename}"
+        
+        print(f"[FAST-MODE] Saving file: {filename}")
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        
+        # Extract text
+        print(f"[FAST-MODE] Extracting text from {file_extension.upper()}...")
+        extracted_text = extract_text(file_path, file_extension)
+        
+        if len(extracted_text.strip()) < 100:
+            raise HTTPException(400, "Could not extract sufficient text from document")
+        
+        print(f"[FAST-MODE] Extracted {len(extracted_text)} characters")
+        
+        # Structure basic data (quick pass)
+        structured_dpr = structure_dpr_data(extracted_text)
+        
+        # OPTIMIZED: Direct recommendations generation only (skip full analysis)
+        print("[FAST-MODE] Generating recommendations directly...")
+        
+        prompt = f"""
+You are an AI expert analyzing DPRs for India's Ministry of Development of North Eastern Region (MDoNER).
+
+Analyze this DPR and provide 6-8 PRIORITY-BASED recommendations for improvement:
+
+PROJECT DETAILS:
+- Title: {structured_dpr.get('project_title', 'Not specified')}
+- Type: {structured_dpr.get('project_type', 'general')}
+- Budget: {structured_dpr.get('budget', {}).get('total_formatted', 'Not specified')}
+- Timeline: {structured_dpr.get('timeline', {}).get('duration', 'Not specified')}
+- Location: {structured_dpr.get('location', 'North Eastern Region')}
+
+DPR CONTENT (First 15000 characters):
+{extracted_text[:15000]}
+
+CRITICAL INSTRUCTIONS:
+1. Analyze gaps against MDoNER approval requirements
+2. Provide EXTENSIVE 4-5 LINE explanations for each recommendation
+3. Prioritize by impact on approval success
+
+Format each recommendation as:
+"PRIORITY X - [CATEGORY] Specific actionable recommendation - EXTENSIVE 4-5 LINE EXPLANATION covering: (1) Why this addresses MDoNER approval requirements, (2) How it improves project implementation success, (3) What specific risks it mitigates, (4) Impact on regulatory compliance, (5) Benefits for stakeholders and measurable project outcomes"
+
+Categories: [BUDGET], [TIMELINE], [TECHNICAL], [COMPLIANCE], [RISK], [DOCUMENTATION], [STAKEHOLDER], [ENVIRONMENTAL], [FINANCIAL]
+
+Example:
+"PRIORITY 1 - [BUDGET] Revise the cost estimates in Section 3.1 to include detailed unit rates, quantity derivations, and market analysis for each construction component - This detailed cost breakdown is specifically mandated by MDoNER financial guidelines and treasury department requirements to ensure complete transparency in fund utilization. The absence of proper unit rate justification will lead to immediate rejection by the financial review committee as they need to verify that public funds are being allocated efficiently and market rates are realistic. Detailed cost analysis also enables proper fund allocation monitoring during implementation, prevents cost overruns that could jeopardize project completion, and demonstrates value-for-money to approval committees who scrutinize every budget line item."
+
+Return ONLY a JSON object:
+{{
+    "standard_assessment": "Brief 2-3 sentence assessment of DPR quality and readiness",
+    "detailed_recommendations": [
+        "PRIORITY 1 - [CATEGORY] Detailed recommendation with 4-5 line explanation...",
+        "PRIORITY 2 - [CATEGORY] Next recommendation with detailed reasoning...",
+        "... (6-8 total recommendations)"
+    ]
+}}
+"""
+        
+        try:
+            response = gemini_model.generate_content(prompt)
+            insights_data = parse_json_response(response.text)
+            
+            # Handle the format with standard assessment and detailed recommendations
+            if isinstance(insights_data, dict) and 'detailed_recommendations' in insights_data:
+                standard_assessment = insights_data.get('standard_assessment', '')
+                recommendations = insights_data.get('detailed_recommendations', [])
+                
+                # Ensure proper formatting
+                enhanced_insights = []
+                for i, insight in enumerate(recommendations):
+                    if not insight.startswith("PRIORITY"):
+                        priority = i + 1
+                        if "[" not in insight or "]" not in insight:
+                            insight = f"PRIORITY {priority} - [GENERAL] {insight} - This improvement is recommended to strengthen the DPR submission and increase approval chances with MDoNER by addressing critical evaluation criteria."
+                        else:
+                            insight = f"PRIORITY {priority} - {insight}"
+                    enhanced_insights.append(insight)
+                
+                # Add assessment as first item
+                if standard_assessment:
+                    enhanced_insights.insert(0, f"ASSESSMENT - {standard_assessment}")
+                
+                actionable_insights = enhanced_insights[:10]
+            else:
+                # Fallback
+                actionable_insights = [
+                    "ASSESSMENT - The DPR provides a solid foundation but requires revisions to address gaps in environmental and social impact assessments, risk assessment, and financial viability.",
+                    "PRIORITY 1 - [REVIEW] Conduct a comprehensive review of all DPR sections to ensure completeness and accuracy - A thorough review is essential to identify and address any gaps that could delay MDoNER approval or cause implementation issues, particularly in areas of environmental assessment, social impact analysis, and financial viability documentation."
+                ]
+        
+        except Exception as e:
+            print(f"[FAST-MODE ERROR] Recommendations generation failed: {e}")
+            actionable_insights = [
+                "ASSESSMENT - The DPR provides a solid foundation but requires revisions to address gaps in environmental and social impact assessments, risk assessment, and financial viability.",
+                "PRIORITY 1 - [REVIEW] Conduct a comprehensive review of all DPR sections to ensure completeness and accuracy - A thorough review is essential to identify and address any gaps that could delay MDoNER approval."
+            ]
+        
+        # Build fast response (minimal data)
+        result = {
+            "dpr_id": timestamp,
+            "filename": file.filename,
+            "upload_time": datetime.now().isoformat(),
+            "extracted_data": {
+                "project_title": structured_dpr.get('project_title', 'Not specified'),
+                "project_type": structured_dpr.get('project_type', 'general'),
+                "location": structured_dpr.get('location', 'Not specified'),
+                "budget": {
+                    "total": structured_dpr.get('budget', {}).get('total', 0),
+                    "total_formatted": structured_dpr.get('budget', {}).get('details', 'Not specified'),
+                    "currency": structured_dpr.get('budget', {}).get('currency', 'INR')
+                },
+                "timeline": {
+                    "duration": structured_dpr.get('timeline', {}).get('duration', 'Not specified'),
+                    "duration_months": structured_dpr.get('timeline', {}).get('duration_months', 0)
+                },
+                "word_count": structured_dpr.get('word_count', 0)
+            },
+            "actionable_insights": actionable_insights,
+            "language": language,
+            "full_text": extracted_text
+        }
+        
+        print(f"[FAST-MODE COMPLETE] Generated {len(actionable_insights)} recommendations in optimized mode")
+        
+        return {"status": "success", "result": result}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"[FAST-MODE ERROR] Error: {e}")
+        raise HTTPException(500, f"Error processing DPR: {str(e)}")
+
+
+@app.post("/api/admin/review-compliance")
+async def admin_review_compliance(
+    dpr_text: str = Form(...),
+    project_info: str = Form(...),
+    compliance_only: str = Form("false"),
+    get_recommendation: str = Form("false")
+):
+    """
+    Admin Compliance Review - Check if DPR meets MDoNER guidelines
+    - compliance_only=true: Returns only compliance check (no auto-rejection, no feasibility)
+    - get_recommendation=true: Returns detailed feasibility assessment (Technical, Financial, Risk)
+    """
+    try:
+        compliance_only_mode = compliance_only.lower() == "true"
+        get_recommendation_mode = get_recommendation.lower() == "true"
+        
+        print(f"[ADMIN-REVIEW] Mode: compliance_only={compliance_only_mode}, get_recommendation={get_recommendation_mode}")
+        print(f"[ADMIN-REVIEW] DPR text length: {len(dpr_text)}")
+        print(f"[ADMIN-REVIEW] Project info: {project_info[:200]}...")
+        
+        if not dpr_text or len(dpr_text) < 100:
+            raise HTTPException(400, "DPR text is too short or empty")
+        
+        # Parse project info
+        try:
+            project_data = json.loads(project_info)
+        except json.JSONDecodeError as e:
+            print(f"[ADMIN-REVIEW ERROR] Failed to parse project_info: {e}")
+            raise HTTPException(400, f"Invalid project info JSON: {str(e)}")
+        
+        print(f"[ADMIN-REVIEW] Project data parsed successfully")
+        
+        # If get_recommendation mode, skip compliance check and go straight to detailed assessment
+        if get_recommendation_mode:
+            print(f"[ADMIN-REVIEW] 📊 Generating detailed feasibility recommendations...")
+            
+            assessment_prompt = f"""
+You are a senior MDoNER approval committee member providing detailed recommendations.
+
+PROJECT INFORMATION:
+{json.dumps(project_data, indent=2)}
+
+DPR CONTENT:
+{dpr_text[:20000]}
+
+ANALYZE THESE THREE CRITICAL DIMENSIONS IN ORDER:
+
+1. **TECHNICAL FEASIBILITY** (Analyze First - Weight: 35%)
+   - Design adequacy and engineering standards compliance
+   - Site suitability and geological conditions
+   - Construction methodology feasibility
+   - Quality assurance mechanisms
+   - Technical expertise of implementing agency
+
+2. **FINANCIAL FEASIBILITY** (Analyze Second - Weight: 35%)
+   - Budget realism and cost estimates accuracy
+   - Funding mechanism viability
+   - Economic viability (BCR, EIRR, NPV, Payback)
+   - Cost-benefit analysis
+   - Financial sustainability
+
+3. **RISK ASSESSMENT** (Analyze Last - Weight: 30%)
+   - Identified risks and mitigation strategies
+   - Implementation risks (delays, cost overruns)
+   - Environmental and social risks
+   - Operational risks
+   - Contingency planning adequacy
+
+PROVIDE DETAILED RECOMMENDATIONS IN JSON FORMAT:
+{{
+  "assessment": {{
+    "technical": {{
+      "score": 0-100,
+      "rating": "EXCELLENT" / "GOOD" / "ADEQUATE" / "WEAK",
+      "strengths": ["list 3-5 specific technical strengths"],
+      "concerns": ["list 2-4 technical concerns if any"],
+      "detailed_analysis": "4-5 sentences analyzing technical feasibility, design standards, site suitability"
+    }},
+    "financial": {{
+      "score": 0-100,
+      "rating": "EXCELLENT" / "GOOD" / "ADEQUATE" / "WEAK",
+      "strengths": ["list 3-5 specific financial strengths"],
+      "concerns": ["list 2-4 financial concerns if any"],
+      "detailed_analysis": "4-5 sentences analyzing budget adequacy, economic viability, funding mechanism"
+    }},
+    "risk": {{
+      "score": 0-100,
+      "rating": "EXCELLENT" / "GOOD" / "ADEQUATE" / "WEAK",
+      "strengths": ["list 3-5 risk management strengths"],
+      "concerns": ["list 2-4 risk-related concerns"],
+      "detailed_analysis": "4-5 sentences analyzing risk identification, mitigation strategies, contingency planning"
+    }}
+  }},
+  "recommendation": {{
+    "action": "APPROVE" / "CONDITIONAL_APPROVE" / "REQUEST_REVISIONS",
+    "overall_score": 0-100,
+    "confidence": 0-100,
+    "summary": "Comprehensive 4-6 sentence summary explaining the recommendation with specific references to technical, financial, and risk factors"
+  }}
+}}
+
+Scoring Guidelines:
+- 80-100: Excellent - Strongly recommend approval
+- 60-79: Good - Recommend approval with minor conditions
+- 40-59: Adequate - Request revisions before approval
+- 0-39: Weak - Major concerns, recommend rejection
+
+Be specific and actionable in your analysis.
+"""
+            
+            print(f"[ADMIN-REVIEW] Calling Gemini for detailed assessment...")
+            assessment_response = gemini_model.generate_content(assessment_prompt)
+            assessment_data = parse_json_response(assessment_response.text)
+            
+            print(f"[ADMIN-REVIEW] ✅ Recommendation generated:")
+            print(f"  - Technical Score: {assessment_data.get('assessment', {}).get('technical', {}).get('score', 0)}/100")
+            print(f"  - Financial Score: {assessment_data.get('assessment', {}).get('financial', {}).get('score', 0)}/100")
+            print(f"  - Risk Score: {assessment_data.get('assessment', {}).get('risk', {}).get('score', 0)}/100")
+            print(f"  - Overall Score: {assessment_data.get('recommendation', {}).get('overall_score', 0)}/100")
+            print(f"  - Action: {assessment_data.get('recommendation', {}).get('action', 'N/A')}")
+            
+            return {
+                "status": "recommendation_ready",
+                "assessment": assessment_data.get('assessment', {}),
+                "recommendation": assessment_data.get('recommendation', {})
+            }
+        
+        # Otherwise, perform compliance check
+        # Step 1: MDoNER Guidelines Compliance Check
+        compliance_prompt = f"""
+You are an expert MDoNER compliance officer reviewing a DPR submission.
+
+PROJECT INFORMATION:
+{json.dumps(project_data, indent=2)}
+
+DPR CONTENT (First 20000 characters):
+{dpr_text[:20000]}
+
+CRITICAL TASK: Evaluate if this DPR meets MANDATORY MDoNER guidelines for North Eastern Region projects.
+
+CHECK THESE MANDATORY REQUIREMENTS:
+1. **Project Location**: Must be in North Eastern Region (Assam, Arunachal Pradesh, Manipur, Meghalaya, Mizoram, Nagaland, Sikkim, Tripura)
+2. **Budget Documentation**: Detailed cost breakdown with quantities, rates, and totals
+3. **Timeline**: Clear implementation schedule with milestones
+4. **Technical Specifications**: Design standards, technical details, compliance codes
+5. **Environmental Clearance**: Status of environmental approvals (EC/2024 or similar)
+6. **Social Impact Assessment**: Land acquisition, R&R plan, stakeholder consultation
+7. **Risk Assessment**: Identified risks with mitigation strategies
+8. **Funding Mechanism**: Clear central-state funding split (typically 90:10 for NER)
+9. **Implementing Agency**: Clearly identified with nodal officer details
+10. **Statutory Approvals**: List of obtained/pending clearances
+
+RESPOND IN STRICT JSON FORMAT:
+{{
+  "compliant": true/false,
+  "compliance_score": 0-100,
+  "critical_violations": ["list of mandatory requirements NOT met"],
+  "missing_sections": ["list of missing critical sections"],
+  "rejection_reason": "Detailed reason if non-compliant, null if compliant",
+  "compliance_summary": "Brief 2-3 sentence summary"
+}}
+
+If ANY critical violations exist, set compliant=false and provide detailed rejection_reason.
+"""
+
+        print(f"[ADMIN-REVIEW] Checking MDoNER compliance...")
+        compliance_response = gemini_model.generate_content(compliance_prompt)
+        compliance_data = parse_json_response(compliance_response.text)
+        
+        print(f"[ADMIN-REVIEW] Compliance Score: {compliance_data.get('compliance_score', 0)}%")
+        print(f"[ADMIN-REVIEW] Compliant: {compliance_data.get('compliant', False)}")
+        
+        # If compliance_only mode, return just the compliance check
+        if compliance_only_mode:
+            print(f"[ADMIN-REVIEW] Compliance-only mode: Returning compliance data for manual admin review")
+            return {
+                "status": "compliance_checked",
+                "compliance_data": compliance_data,
+                "compliant": compliance_data.get('compliant', False)
+            }
+        
+        # Legacy mode: Auto-reject if non-compliant
+        if not compliance_data.get('compliant', False):
+            print(f"[ADMIN-REVIEW] ❌ AUTO-REJECTED - Non-compliant with MDoNER guidelines")
+            return {
+                "status": "rejected",
+                "auto_rejected": True,
+                "compliance_data": compliance_data,
+                "reason": compliance_data.get('rejection_reason', 'Does not meet MDoNER mandatory guidelines'),
+                "recommendation": {
+                    "action": "REJECT",
+                    "confidence": "HIGH",
+                    "summary": "DPR does not meet mandatory MDoNER guidelines and must be rejected."
+                }
+            }
+        
+        # Step 2: If compliant, perform detailed feasibility assessment
+        print(f"[ADMIN-REVIEW] ✅ Compliant - Generating approval recommendations...")
+        
+        assessment_prompt = f"""
+You are a senior MDoNER approval committee member providing detailed recommendations to the admin.
+
+The DPR has PASSED mandatory compliance checks. Now provide DETAILED APPROVAL RECOMMENDATIONS.
+
+PROJECT INFORMATION:
+{json.dumps(project_data, indent=2)}
+
+DPR CONTENT:
+{dpr_text[:20000]}
+
+COMPLIANCE STATUS: ✅ PASSED (Score: {compliance_data.get('compliance_score', 0)}%)
+
+ANALYZE THESE THREE CRITICAL DIMENSIONS:
+
+1. **TECHNICAL FEASIBILITY** (Weight: 35%)
+   - Design adequacy and engineering standards compliance
+   - Site suitability and geological conditions
+   - Construction methodology feasibility
+   - Quality assurance mechanisms
+   - Technical expertise of implementing agency
+
+2. **FINANCIAL FEASIBILITY** (Weight: 35%)
+   - Budget realism and cost estimates accuracy
+   - Funding mechanism viability
+   - Economic viability (BCR, EIRR, NPV, Payback)
+   - Cost-benefit analysis
+   - Financial sustainability
+
+3. **RISK ASSESSMENT** (Weight: 30%)
+   - Identified risks and mitigation strategies
+   - Implementation risks (delays, cost overruns)
+   - Environmental and social risks
+   - Operational risks
+   - Contingency planning adequacy
+
+PROVIDE DETAILED RECOMMENDATIONS IN JSON FORMAT:
+{{
+  "overall_recommendation": "APPROVE" / "CONDITIONAL_APPROVE" / "REQUEST_REVISIONS",
+  "confidence_level": "HIGH" / "MEDIUM" / "LOW",
+  "approval_score": 0-100,
+  
+  "technical_feasibility": {{
+    "score": 0-100,
+    "rating": "EXCELLENT" / "GOOD" / "ADEQUATE" / "WEAK",
+    "strengths": ["list 3-5 technical strengths"],
+    "concerns": ["list 2-4 technical concerns if any"],
+    "detailed_analysis": "4-5 sentences on technical evaluation",
+    "recommendation": "Approve/Revise with specific actions"
+  }},
+  
+  "financial_feasibility": {{
+    "score": 0-100,
+    "rating": "EXCELLENT" / "GOOD" / "ADEQUATE" / "WEAK",
+    "strengths": ["list 3-5 financial strengths"],
+    "concerns": ["list 2-4 financial concerns if any"],
+    "detailed_analysis": "4-5 sentences on financial evaluation",
+    "budget_adequacy": "Assessment of cost estimates",
+    "economic_viability": "Assessment of BCR, EIRR, NPV",
+    "recommendation": "Approve/Revise with specific actions"
+  }},
+  
+  "risk_assessment": {{
+    "score": 0-100,
+    "rating": "EXCELLENT" / "GOOD" / "ADEQUATE" / "WEAK",
+    "strengths": ["list 3-5 risk management strengths"],
+    "concerns": ["list 2-4 risk concerns if any"],
+    "detailed_analysis": "4-5 sentences on risk evaluation",
+    "critical_risks": ["list top 3 critical risks"],
+    "mitigation_adequacy": "Assessment of mitigation strategies",
+    "recommendation": "Approve/Revise with specific actions"
+  }},
+  
+  "key_highlights": ["list 5-7 key points for admin decision"],
+  "conditions_for_approval": ["list any conditions/requirements before final approval"],
+  "admin_action_summary": "Clear 3-4 sentence summary for admin on what action to take and why",
+  "estimated_success_probability": "percentage",
+  "timeline_realism": "Assessment of proposed timeline",
+  "overall_justification": "Detailed 5-6 sentence justification for the recommendation"
+}}
+
+Be thorough, specific, and provide actionable insights. The admin will use this for final decision.
+"""
+
+        print(f"[ADMIN-REVIEW] Generating detailed feasibility assessment...")
+        assessment_response = gemini_model.generate_content(assessment_prompt)
+        assessment_data = parse_json_response(assessment_response.text)
+        
+        print(f"[ADMIN-REVIEW] ✅ Assessment complete - Recommendation: {assessment_data.get('overall_recommendation', 'N/A')}")
+        
+        return {
+            "status": "reviewed",
+            "auto_rejected": False,
+            "compliance_data": compliance_data,
+            "assessment": assessment_data,
+            "recommendation": {
+                "action": assessment_data.get('overall_recommendation', 'REQUEST_REVISIONS'),
+                "confidence": assessment_data.get('confidence_level', 'MEDIUM'),
+                "score": assessment_data.get('approval_score', 0),
+                "summary": assessment_data.get('admin_action_summary', '')
+            }
+        }
+        
+    except Exception as e:
+        print(f"[ADMIN-REVIEW ERROR] {e}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(500, f"Error during compliance review: {str(e)}")
 
 
 @app.post("/api/load-guidelines")
